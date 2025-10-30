@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuesioner Pentingnya Membaca by nizam 8k</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f, #fdbb2d);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header i {
+            font-size: 3rem;
+            color: #1a2a6c;
+            margin-bottom: 15px;
+        }
+        
+        h1 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 2.2rem;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .question {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border-left: 5px solid #1a2a6c;
+        }
+        
+        .question:hover {
+            transform: translateY(-5px);
+        }
+        
+        .question-title {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-title i {
+            margin-right: 10px;
+            color: #1a2a6c;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .option:hover {
+            background-color: #f1f8ff;
+            border-color: #3498db;
+        }
+        
+        .option.selected {
+            background-color: #e1f5fe;
+            border-color: #0288d1;
+        }
+        
+        .option input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(26, 42, 108, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 42, 108, 0.6);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            flex-grow: 1;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-text {
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background-color: #2ecc71;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .progress-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .progress-bar {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-book-reader"></i>
+            <h1>Kuesioner Pentingnya Membaca BY NIZAM DZULFIQAR RISMAWAN KELAS 8-K </h1>
+            <p class="subtitle">Isi data diri dan pilih jawaban yang sesuai dengan pendapat kamu 
+            selamat mengisi 🤗</p>
+        </div>
+        
+        <div class="progress-container">
+            <span class="progress-text">Progress</span>
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <span class="progress-text" id="progressText">0/10</span>
+        </div>
+        
+        <form id="questionnaire">
+            <div class="form-group">
+                <label for="name"><i class="fas fa-user"></i> Nama Lengkap</label>
+                <input type="text" id="name" name="name" required placeholder="Masukkan nama lengkap Anda">
+            </div>
+            
+            <div class="form-group">
+                <label for="class"><i class="fas fa-graduation-cap"></i> Kelas</label>
+                <input type="text" id="class" name="class" required placeholder="Contoh: 8k 1">
+            </div>
+            
+            <!-- Pertanyaan 1 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>1. Menurut Anda, seberapa penting membaca untuk pengembangan diri?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="Sangat Penting">
+                        <span>Sangat Penting</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="Penting">
+                        <span>Penting</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="Cukup Penting">
+                        <span>Cukup Penting</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="Tidak Penting">
+                        <span>Tidak Penting</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 2 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>2. Manakah dari berikut ini yang merupakan manfaat utama membaca?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="Memperluas kosa kata">
+                        <span>Memperluas kosa kata</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="Meningkatkan konsentrasi">
+                        <span>Meningkatkan konsentrasi</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="Mengurangi stres">
+                        <span>Mengurangi stres</span>
+                    
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 3 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>3. Bagaimana membaca dapat meningkatkan kemampuan komunikasi?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="Memperkaya kosa kata">
+                        <span>Memperkaya kosa kata</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="Memahami struktur kalimat yang baik">
+                        <span>Memahami struktur kalimat yang baik</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="Mempelajari gaya penulisan yang efektif">
+                        <span>Mempelajari gaya penulisan yang efektif</span>
+                    
+                        
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 4 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>4. Mengapa membaca dianggap sebagai jendela dunia?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="Karena membuka wawasan tentang budaya lain">
+                        <span>Karena membuka wawasan tentang budaya lain</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="Karena memberikan pengetahuan tentang tempat-tempat jauh">
+                        <span>Karena memberikan pengetahuan tentang tempat-tempat jauh</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="Karena memperluas perspektif tentang kehidupan">
+                        <span>Karena memperluas perspektif tentang kehidupan</span>
+                    
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 5 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>5. Bagaimana kebiasaan membaca dapat mempengaruhi prestasi akademik?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="Meningkatkan pemahaman bacaan">
+                        <span>Meningkatkan pemahaman bacaan</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="Memperluas pengetahuan umum">
+                        <span>Memperluas pengetahuan umum</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="Meningkatkan kemampuan analisis">
+                        <span>Meningkatkan kemampuan analisis</span>
+                  
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 6 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>6. Apa dampak positif membaca terhadap perkembangan otak?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="Meningkatkan konektivitas saraf">
+                        <span>Meningkatkan konektivitas saraf</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="Memperkuat memori">
+                        <span>Memperkuat memori</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="Melatih kemampuan berpikir kritis">
+                        <span>Melatih kemampuan berpikir kritis</span>
+                    
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 7 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>7. Mengapa membaca penting dalam era digital seperti sekarang?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="Membantu menyaring informasi yang valid">
+                        <span>Membantu menyaring informasi yang valid</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="Mengembangkan kemampuan literasi digital">
+                        <span>Mengembangkan kemampuan literasi digital</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="Mencegah penyebaran hoaks">
+                        <span>Mencegah penyebaran hoaks</span>
+                    
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 8 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>8. Bagaimana membaca dapat meningkatkan empati?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="Dengan memahami perasaan tokoh dalam cerita">
+                        <span>Dengan memahami perasaan tokoh dalam cerita</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="Dengan melihat dunia dari sudut pandang orang lain">
+                        <span>Dengan melihat dunia dari sudut pandang orang lain</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="Dengan memahami berbagai perspektif kehidupan">
+                        <span>Dengan memahami berbagai perspektif kehidupan</span>
+                    
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 9 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>9. Apa manfaat membaca bagi kesehatan mental?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="Mengurangi stres dan kecemasan">
+                        <span>Mengurangi stres dan kecemasan</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="Meningkatkan kualitas tidur">
+                        <span>Meningkatkan kualitas tidur</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="Memberikan ketenangan pikiran">
+                        <span>Memberikan ketenangan pikiran</span>
+                   
+                </div>
+            </div>
+            
+            <!-- Pertanyaan 10 -->
+            <div class="question">
+                <div class="question-title">
+                    <i class="fas fa-question-circle"></i>
+                    <span>10. Mengapa penting menumbuhkan kebiasaan membaca sejak dini?</span>
+                </div>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="Membentuk fondasi belajar yang kuat">
+                        <span>Membentuk fondasi belajar yang kuat</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="Mengembangkan imajinasi dan kreativitas">
+                        <span>Mengembangkan imajinasi dan kreativitas</span>
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="Membantu perkembangan kognitif">
+                        <span>Membantu perkembangan kognitif</span>
+
+
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                <i class="fab fa-whatsapp"></i>
+                Kirim Jawaban ke WhatsApp
+            </button>
+        </form>
+        
+        <div class="footer">
+            <p> Copyright @ 2025 Nizam DzR, All rights reserved. Powered by Nizam DzR_Dev Tech <\>
+        </div>
+    </div>
+    
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Jawaban berhasil dikirim!</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('questionnaire');
+            const progressBar = document.getElementById('progress');
+            const progressText = document.getElementById('progressText');
+            const notification = docume
